@@ -7,11 +7,43 @@ const config: Config = {
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    screens: {
+      sm: "480px",
+      md: "768px",
+      lg: "976px",
+      xl: "1440px",
+    },
     extend: {
+      fontFamily: {
+        inter: ["var(--font-inter)"],
+        firacode: ["var(--font-firacode)"],
+      },
+      colors: {
+        // light
+        cyan: "#92C7CF",
+        aqua: "#AAD7D9",
+        "vista-white": "#FBF9F1",
+        satin: "#E5E1DA",
+        // dark
+        gunmetal: "#352F44",
+        comet: "#5C5470",
+        lily: "#B9B4C7",
+        linen: "#FAF0E6",
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
           "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
+      },
+      animation: {
+        typewriter: "typewriter 2s steps(11) forwards infinite",
+      },
+      keyframes: {
+        typewriter: {
+          to: {
+            left: "100%",
+          },
+        },
       },
     },
   },
