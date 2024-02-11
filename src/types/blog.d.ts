@@ -1,3 +1,10 @@
+export enum MatchLevel {
+  None = "none",
+}
+export enum Type {
+  Comment = "comment",
+  Story = "story",
+}
 export interface Blogs {
   exhaustive: Exhaustive;
   exhaustiveNbHits: boolean;
@@ -28,7 +35,7 @@ export interface Hit {
   num_comments: number;
   objectID: string;
   points: number;
-  story_id: number;
+  objectID: number;
   title: string;
   updated_at: Date;
   url: string;
@@ -47,10 +54,6 @@ export interface Author {
   value: string;
 }
 
-export enum MatchLevel {
-  None = "none",
-}
-
 export interface ProcessingTimingsMS {
   _request: Request;
   total: number;
@@ -58,4 +61,21 @@ export interface ProcessingTimingsMS {
 
 export interface Request {
   roundTrip: number;
+}
+
+//  blog details
+export interface Blog {
+  author: string;
+  children: Blog[];
+  created_at: Date;
+  created_at_i: number;
+  id: number;
+  options: any[];
+  parent_id: number | null;
+  points: number | null;
+  story_id: number;
+  text: null | string;
+  title: null | string;
+  type: Type;
+  url: null | string;
 }

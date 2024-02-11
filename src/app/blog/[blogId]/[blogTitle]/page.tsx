@@ -1,9 +1,10 @@
+import BlogDetails from "@/components/ui/blog-details";
 import { Hit } from "@/types/blog";
 import { Metadata } from "next";
 import React from "react";
 
 type Props = {
-  params: { blogId: Hit["story_id"]; blogTitle: Hit["title"] };
+  params: { blogId: Hit["objectID"]; blogTitle: Hit["title"] };
 };
 
 export const generateMetadata = async (props: Props): Promise<Metadata> => {
@@ -14,7 +15,14 @@ export const generateMetadata = async (props: Props): Promise<Metadata> => {
 };
 
 const BlogDetailsPage = ({ params }: Props) => {
-  return <div>{params.blogId}</div>;
+  return (
+    <div className="p-5 md:p-20 flex justify-center">
+      <BlogDetails
+        title={params.blogTitle.replaceAll("%20", " ")}
+        id={params.blogId}
+      />
+    </div>
+  );
 };
 
 export default BlogDetailsPage;

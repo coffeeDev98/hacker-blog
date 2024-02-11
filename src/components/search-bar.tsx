@@ -29,7 +29,7 @@ const SearchBar = ({ className }: Props) => {
     <input
       type="text"
       placeholder="Search"
-      className="w-1/3 h-10 border-b border-comet bg-transparent border-opacity-50 outline-none focus:w-full md:focus:w-1/2 duration-300"
+      className="w-1/2 md:w-1/3 h-10 border-b text-gunmetal border-cyan bg-transparent border-opacity-75 outline-none focus:w-[calc(100%-80px)] focus:border-opacity-100 md:focus:w-1/2 md:focus:scale-110 duration-300 dark:text-vista-white"
     />
   );
 };

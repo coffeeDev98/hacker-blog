@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "../styles/global.scss";
 import { firacode, inter } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
+import Bar from "@/components/bar";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -23,6 +24,7 @@ export default function RootLayout({
           "bg-vista-white dark:bg-gunmetal"
         )}
       >
+        <Bar />
         {children}
       </body>
     </html>
