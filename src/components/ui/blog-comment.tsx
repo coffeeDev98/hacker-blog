@@ -38,7 +38,7 @@ const BlogComment = ({ data, nested }: Props) => {
       )}
       onClick={() => {}}
     >
-      <div className="relative flex flex-col pb-10">
+      <div className={cn("relative flex flex-col", replyCount > 0 && "pb-10")}>
         <div className="">
           <span className="font-semibold dark:text-linen">{data.author}</span>{" "}
           <span className="text-xs text-comet dark:text-lily">

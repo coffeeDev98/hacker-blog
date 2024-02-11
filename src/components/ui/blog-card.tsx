@@ -1,24 +1,50 @@
+"use client";
+import { getColorSet } from "@/constants/config";
+import { useBlogs } from "@/hooks/use-blogs";
+import { cn, lg } from "@/lib/utils";
 import { Hit } from "@/types/blog";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import React from "react";
+import React, { useMemo } from "react";
 
 type Props = {
   data: Hit;
+  index: number;
+  className?: string;
 };
 
-const BlogCard = ({ data }: Props) => {
+const BlogCard = ({ data, className, index }: Props) => {
+  const { blogs } = useBlogs();
+
+  const colorSet = useMemo(() => getColorSet(index, blogs.length), []);
   return (
-    <Link href={`/blog/${data.objectID}/${data.title}`}>
+    <Link href={`/blog/${data.objectID}/${data.title}`} className="hover:z-10">
       <motion.div
-        whileHover={{ scale: 1.05 }}
+        whileHover={{
+          scale: 1.1,
+          background: lg(colorSet.c1, colorSet.c2, "100%"),
+        }}
         whileTap={{ scale: 0.9 }}
-        className="w-full h-full text-left p-5 pb-3 border-comet text-gunmetal border-[0.5px] border-opacity-25 flex flex-col justify-between font-inter dark:border-lily dark:text-linen"
+        className={cn(
+          "rounded-xl w-full h-full text-left p-5 pb-3 bg-vista-white border-comet text-gunmetal border-[0.5px] border-opacity-25 flex flex-col justify-between font-inter text-xl hover:text-2xl",
+          "dark:border-lily dark:bg-gunmetal",
+          // "hover:scale-105 lg:hover:scale-110",
+          className
+        )}
+        style={{
+          background: `linear-gradient(90deg, ${colorSet.c1}, ${colorSet.c2} 51%,${colorSet.c1}) 0/ 200%`,
+        }}
       >
-        <h3 className="mb-5">{data.title}</h3>
+        <div className="mb-5">
+          <h3>{data.title}</h3>
+          <div>
+            Do dolor eu incididunt non id quis mollit proident ex id cupidatat
+            occaecat officia ea.
+          </div>
+        </div>
         <div className="w-full border-t-[0.5px] border-t-comet border-opacity-30 py-2 dark:border-t-lily">
           <span className="mr-1">By</span>
-          <span className="text-comet dark:text-lily">
+          <span className="text-comet">
             <strong>{data.author}</strong>
           </span>
         </div>

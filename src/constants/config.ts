@@ -26,3 +26,33 @@ export const theme = {
   lily: "#B9B4C7",
   linen: "#FAF0E6",
 };
+export const colorSet = [
+  {
+    c1: "#f6d365",
+    c2: "#fda085",
+  },
+  {
+    c1: "#fbc2eb",
+    c2: "#a6c1ee",
+  },
+  {
+    c1: "#84fab0",
+    c2: "#8fd3f4",
+  },
+  {
+    c1: "#a1c4fd",
+    c2: "#c2e9fb",
+  },
+  {
+    c1: "#ffecd2",
+    c2: "#fcb69f",
+  },
+];
+
+export const getColorSet = (index?: number, length?: number) => {
+  if (index && length) {
+    return colorSet[(index % length) % colorSet.length];
+  }
+
+  return colorSet[Math.floor(Math.random() * colorSet.length)];
+};
