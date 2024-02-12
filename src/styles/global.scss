@@ -138,17 +138,18 @@ h6 {
   }
 }
 
-@-webkit-keyframes popUp {
-  0% {
+.lucide-circle-user-round {
+  @apply bg-gunmetal rounded-full dark:bg-vista-white;
+  path {
+    @apply stroke-vista-white dark:stroke-gunmetal;
   }
-  70% {
-    -webkit-transform: scale(1.1);
-    opacity: 0.8;
-    -webkit-animation-timing-function: ease-out;
-  }
-  100% {
-    -webkit-transform: scale(1);
-    opacity: 1;
+  circle {
+    &:nth-child(2) {
+      @apply stroke-vista-white dark:stroke-gunmetal;
+    }
+    &:last-child {
+      @apply stroke-gunmetal dark:stroke-vista-white;
+    }
   }
 }
 

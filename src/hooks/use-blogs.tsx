@@ -17,7 +17,7 @@ interface IBlogsStore {
   incrementPage: () => void;
   fetchAllBlogs: () => void;
   fetchFrontPageBlogs: () => void;
-  getBlogDetails: (id: Hit["objectID"]) => Promise<Hit>;
+  getBlogDetails: (id: Hit["objectID"]) => void;
   fetchSearchResults: (phrase: string) => void;
   reset: () => void;
 }
@@ -47,7 +47,6 @@ export const useBlogs = create<IBlogsStore>()(
           await fetch(page ? urls.fetchPage(page) : urls.search)
         ).json();
 
-        console.log("response =>", response);
         const currBlogs = get().blogs;
         const currBlogIds = currBlogs.map((b) => b.objectID);
         set({
@@ -76,11 +75,13 @@ export const useBlogs = create<IBlogsStore>()(
         }
       },
       getBlogDetails: async (id) => {
-        set({ current: null });
-        const blog = await (await fetch(urls.blogDetails(id))).json();
-        console.log("COMMENTS => ", blog);
-        set({ current: blog });
-        return blog;
+        const { current } = get();
+        console.log("COMPARE => ", id, `${current?.story_id}`);
+        if (id !== `${current?.story_id}`) {
+          set({ current: null });
+          const blog = await (await fetch(urls.blogDetails(id))).json();
+          set({ current: blog });
+        }
       },
       fetchSearchResults: async (phrase) => {
         const { reset } = get();

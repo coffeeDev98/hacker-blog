@@ -39,6 +39,7 @@ const config: Config = {
         typewriter: "typewriter 1s steps(11) infinite",
         caret:
           "typewriter 1s steps(11) infinite, blink 1s steps(11) infinite 1s",
+        popup: "popup 0.6s ease-in forwards",
       },
       keyframes: {
         typewriter: {
@@ -59,6 +60,21 @@ const config: Config = {
           },
           "100%": {
             opacity: "0",
+          },
+        },
+        popup: {
+          "0%": {},
+          "70%": {
+            "-webkit-transform": "scale(1.1)",
+            transform: "scale(1.1)",
+            opacity: "0.8",
+            "-webkit-animation-timing-function": "ease-out",
+            "animation-timing-function": "ease-out",
+          },
+          "100%": {
+            "-webkit-transform": "scale(1)",
+            transform: "scale(1)",
+            opacity: "1",
           },
         },
       },

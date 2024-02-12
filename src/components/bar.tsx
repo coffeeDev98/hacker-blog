@@ -10,7 +10,7 @@ type Props = {
 
 const Bar = (props: Props) => {
   return (
-    <div className="h-[120px] relative left-1/2 -translate-x-1/2 w-full md:w-[90%] xl:w-full p-8 xl:px-0 max-w-screen-xl flex justify-between items-center gap-3">
+    <div className="h-[120px] relative left-1/2 -translate-x-1/2 w-full md:w-[90%] p-8 max-w-screen-xl flex justify-between items-center gap-3">
       <Link href="/">
         <Home className="w-6 aspect-square stroke-gunmetal dark:stroke-vista-white" />
       </Link>

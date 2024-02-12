@@ -6,14 +6,21 @@ import { useSearchParams } from "next/navigation";
 import React, { useEffect, useMemo, useState } from "react";
 import BlogComment from "./blog-comment";
 import { cn, getColorSet, getReplyCount, lg, twlg } from "@/lib/utils";
-import { HandMetal, MessageSquareText } from "lucide-react";
+import {
+  ArrowBigUp,
+  CircleUserRound,
+  HandMetal,
+  MessageSquareText,
+} from "lucide-react";
 import TypewriterLoader from "./typewriter-loader";
 
 type Props = { id: Hit["objectID"]; title: Hit["title"] };
 
 const BlogDetails = ({ id }: Props) => {
-  const [loading, setLoading] = useState<boolean>(false);
   const { current, getBlogDetails } = useBlogs();
+  const [loading, setLoading] = useState<boolean>(
+    `${current?.story_id}` === id ? false : true
+  );
   const fetchData = async () => {
     setLoading(true);
     await getBlogDetails(id);
@@ -29,23 +36,46 @@ const BlogDetails = ({ id }: Props) => {
     <TypewriterLoader />
   ) : (
     <div className="max-w-screen-md relative w-full flex flex-col items-center">
-      <h1
+      <div
         className={cn(
-          "text-5xl w-full flex flex-col justify-center items-center text-center leading-relaxed h-80 border-b-[0.5px] border-b-gunmetal border-opacity-25 dark:border-b-lily text-gunmetal rounded-3xl"
+          "w-full flex flex-col justify-center leading-relaxed h-80 border-b-[0.5px] border-b-gunmetal border-opacity-25",
+          " dark:border-b-lily text-gunmetal dark:text-vista-white"
         )}
-        style={{
-          background: lg(cSet.c1, cSet.c2, "100%"),
-        }}
+        style={{}}
       >
-        <div>{current?.title}</div>
-        <div className="my-0 text-base">
-          <HandMetal className="inline-block fill-gunmetal stroke-gunmetal" />
-          {`${current?.points}`}|{" "}
-          {current?.created_at && new Date(current.created_at).toDateString()} |{" "}
-          <MessageSquareText className="inline-block fill-gunmetal stroke-gunmetal" />
+        <div className="flex gap-3 items-center">
+          <div>
+            <CircleUserRound className="w-[4rem] h-[4rem]" />
+            <div className="h-full w-[1px] bg-gunmetal dark:bg-vista-white" />
+          </div>
+          <div className="flex flex-col gap-3">
+            <h2 className="leading-none my-0">{current?.author}</h2>
+            {current?.created_at && (
+              <div className="text-lg text-cyan leading-none my-0">
+                {new Date(current.created_at).toDateString()}
+              </div>
+            )}
+          </div>
+        </div>
+        <h1
+          className="text-5xl leading-relaxed bg-gradient-to-r from-gunmetal via-blue-800 to-gunmetal dark:from-[#84fab0] dark:via-[#8fd3f4] dark:to-[#84fab0] transition-all duration-200"
+          style={{
+            // background: lg(cSet.c1, cSet.c2, "100%"),
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+          }}
+        >
+          {current?.title}
+        </h1>
+        <div className="my-0 text-base flex gap-2">
+          <ArrowBigUp className="inline-block fill-gunmetal dark:fill-vista-white" />
+          <div>{`${current?.points}`}</div>
+          <div className="h-full w-[1px] bg-gunmetal dark:bg-vista-white" />
+          {/* <MessageSquareText className="inline-block fill-gunmetal stroke-gunmetal" /> */}
+          <MessageSquareText className="inline-block" />
           {getReplyCount(current?.children)}
         </div>
-      </h1>
+      </div>
       {/* <div className="bg-gunmetal bg-opacity-25 h-0.5 w-full my-10 dark:bg-lily"></div> */}
       <div className="w-full max-w-screen-md  text-left flex flex-col">
         {current?.children

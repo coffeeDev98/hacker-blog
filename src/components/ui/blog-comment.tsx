@@ -2,6 +2,7 @@
 import { cn, getReplyCount } from "@/lib/utils";
 import { Blog } from "@/types/blog";
 import { AnimatePresence, motion } from "framer-motion";
+import { CircleUserRound, PlusCircle, Tally1, UserCircle } from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
 
 type Props = {
@@ -30,8 +31,9 @@ const BlogComment = ({ data, nested }: Props) => {
       )}
       onClick={() => {}}
     >
-      <div className={cn("relative flex flex-col", replyCount > 0 && "pb-10")}>
-        <div className="">
+      <div className={cn("relative flex flex-col", replyCount > 0 && "pb-14")}>
+        <div className="flex gap-2">
+          <CircleUserRound className="w-[2rem] h-[2rem]" />
           <span className="text-lg font-semibold dark:text-linen">
             {data.author}
           </span>{" "}
@@ -39,13 +41,22 @@ const BlogComment = ({ data, nested }: Props) => {
             {new Date(data.created_at).toDateString()}:
           </span>
         </div>
+        {data.children.length >= 2 && (
+          <button
+            className="absolute left-[3.5px] h-[calc(100%-0.25rem)] flex flex-col items-center gap-3 opacity-60 hover:opacity-100"
+            onClick={toggleAccordian}
+          >
+            <div className="h-full w-[1px] bg-gunmetal dark:bg-vista-white" />
+            <PlusCircle className="w-6 h-6 stroke-gunmetal dark:stroke-vista-white hover:scale-125" />
+          </button>
+        )}
         <div
-          className="text-xl text-gunmetal dark:text-vista-white"
+          className="pl-10 text-xl text-gunmetal dark:text-vista-white"
           dangerouslySetInnerHTML={{ __html: data.text || "" }}
         ></div>
-        {data.children.length >= 3 && (
+        {!nested && data.children.length >= 2 && (
           <button
-            className="absolute left-0 bottom-0 text-left w-max text-gunmetal hover:font-semibold hover:scale-110 hover:translate-x-1 dark:text-lily"
+            className="ml-10  rounded-3xl absolute left-0 bottom-0 text-xl text-left w-max text-gunmetal hover:font-semibold hover:scale-105 hover:translate-x-1 hover:underline hover:underline-offset-2 dark:text-cyan"
             onClick={toggleAccordian}
           >
             {isOpen ? "Hide" : "View " + replyCount} Repl
@@ -56,7 +67,8 @@ const BlogComment = ({ data, nested }: Props) => {
       <div
         className={cn(
           "scale-y-0 h-0 overflow-hidden",
-          (isOpen || data.children.length < 3) && "scale-y-100 h-auto"
+          (isOpen || (!nested && data.children.length < 2)) &&
+            "scale-y-100 h-auto"
         )}
       >
         {data.children
