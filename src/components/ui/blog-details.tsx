@@ -54,7 +54,7 @@ const BlogDetails = ({ id }: Props) => {
           <div className="flex flex-col gap-3">
             <h2 className="leading-none my-0">{current?.author}</h2>
             {current?.created_at && (
-              <div className="text-lg text-cyan leading-none my-0">
+              <div className="text-lg text-comet dark:text-cyan leading-none my-0">
                 {new Date(current.created_at).toDateString()}
               </div>
             )}
