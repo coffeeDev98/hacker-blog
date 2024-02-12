@@ -1,7 +1,9 @@
 "use client";
+import { useBlogs } from "@/hooks/use-blogs";
 import { cn } from "@/lib/utils";
 import { Nullable } from "@/types/helpers";
 import { Search } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
 
 type Props = {
@@ -9,7 +11,10 @@ type Props = {
 };
 
 const SearchBar = ({ className }: Props) => {
-  const [searchText, setSearchText] = useState<Nullable<string>>(null);
+  const query = useSearchParams().get("query");
+  const [searchText, setSearchText] = useState<string>(query || "");
+  const router = useRouter();
+  const { fetchSearchResults } = useBlogs();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(e.target.value);
@@ -20,22 +25,38 @@ const SearchBar = ({ className }: Props) => {
   };
 
   useEffect(() => {
-    const fnCall = setTimeout(() => {}, 300);
+    setSearchText(query || "");
+  }, [query]);
+  // useEffect(() => {
+  //   const fnCall = setTimeout(() => {
+  //     fetchSearchResults(searchText);
+  //   }, 300);
 
-    return () => {
-      clearTimeout(fnCall);
-    };
-  }, [searchText]);
+  //   return () => {
+  //     clearTimeout(fnCall);
+  //   };
+  // }, [searchText]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") {
+      e.preventDefault();
+      (e.target as any).blur();
+      router.push(searchText === "" ? "/" : `/search?query=${searchText}`);
+    }
+  };
   return (
-    <div className="flex gap-2 items-center">
+    <div className={cn("flex gap-2 items-center", className)}>
+      <button className="hidden md:block cursor-pointer p-1">
+        <Search className="stroke-gunmetal dark:stroke-cyan " />
+      </button>
       <input
         type="text"
+        value={searchText}
         placeholder="Search"
-        className="w-[50vw] md:w-[33vw] h-10 border-b text-gunmetal border-cyan bg-transparent border-opacity-75 outline-none focus:w-[calc(100vw-200px)] focus:border-opacity-100 md:focus:w-[50vw] md:focus:scale-110 duration-300 dark:text-vista-white"
+        className="w-[50vw] md:w-[33vw] h-10 border-b text-gunmetal border-cyan bg-transparent border-opacity-75 outline-none focus:w-[calc(100vw-200px)] focus:border-opacity-100 md:focus:w-[50vw] md:focus:scale-110 duration-300 dark:text-vista-white md:focus:pl-7"
+        onChange={handleChange}
+        onKeyDown={handleKeyDown}
       />
-      <button className="cursor-pointer p-1">
-        <Search className="stroke-gunmetal dark:stroke-cyan hover:fill-gunmetal dark:hover:fill-cyan " />
-      </button>
     </div>
   );
 };

@@ -20,7 +20,7 @@ export default function RootLayout({
         className={cn(
           inter.variable,
           firacode.variable,
-          "font-firacode no-scrollbar",
+          "font-inter no-scrollbar",
           "bg-vista-white dark:bg-gunmetal"
         )}
       >

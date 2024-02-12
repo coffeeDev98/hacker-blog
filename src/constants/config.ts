@@ -48,11 +48,3 @@ export const colorSet = [
     c2: "#fcb69f",
   },
 ];
-
-export const getColorSet = (index?: number, length?: number) => {
-  if (index && length) {
-    return colorSet[(index % length) % colorSet.length];
-  }
-
-  return colorSet[Math.floor(Math.random() * colorSet.length)];
-};

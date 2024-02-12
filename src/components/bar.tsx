@@ -1,7 +1,8 @@
 import React from "react";
 import SearchBar from "./search-bar";
 import ThemeToggle from "./ui/theme-toggle";
-import { usePathname } from "next/navigation";
+import { Home } from "lucide-react";
+import Link from "next/link";
 
 type Props = {
   showSearch?: boolean;
@@ -9,9 +10,12 @@ type Props = {
 
 const Bar = (props: Props) => {
   return (
-    <div className="h-[120px] relative left-1/2 -translate-x-1/2 w-full p-10 max-w-screen-xl flex justify-between md:justify-center items-center">
-      <SearchBar className="mb-10" />
-      <ThemeToggle className="absolute right-5 top-1/2 -translate-y-1/2" />
+    <div className="h-[120px] relative left-1/2 -translate-x-1/2 w-full md:w-[90%] xl:w-full p-8 xl:px-0 max-w-screen-xl flex justify-between items-center gap-3">
+      <Link href="/">
+        <Home className="w-6 aspect-square stroke-gunmetal dark:stroke-vista-white" />
+      </Link>
+      <SearchBar className="" />
+      <ThemeToggle className="" />
     </div>
   );
 };

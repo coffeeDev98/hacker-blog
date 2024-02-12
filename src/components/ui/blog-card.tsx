@@ -1,7 +1,6 @@
 "use client";
-import { getColorSet } from "@/constants/config";
 import { useBlogs } from "@/hooks/use-blogs";
-import { cn, lg } from "@/lib/utils";
+import { cn, getColorSet, lg } from "@/lib/utils";
 import { Hit } from "@/types/blog";
 import { motion } from "framer-motion";
 import Link from "next/link";

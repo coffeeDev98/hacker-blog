@@ -24,7 +24,7 @@ const ThemeToggle = ({ className }: Props) => {
   return (
     <div
       className={cn(
-        "w-[70px] h-8 rounded-3xl border flex justify-evenly items-center",
+        "relative w-[70px] h-8 rounded-3xl border flex justify-evenly items-center",
         !darkMode && "border-gunmetal",
         darkMode && "border-vista-white",
         className

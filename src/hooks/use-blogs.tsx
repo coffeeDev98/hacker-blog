@@ -13,12 +13,13 @@ interface IBlogsStore {
   page: number;
   totalPages?: Blogs["nbPages"];
   hitsPerPage?: Blogs["hitsPerPage"];
-  search: Nullable<string>;
   current: Nullable<Blog>;
   incrementPage: () => void;
-  fetchAllBlogs: (page?: number) => void;
+  fetchAllBlogs: () => void;
   fetchFrontPageBlogs: () => void;
   getBlogDetails: (id: Hit["objectID"]) => Promise<Hit>;
+  fetchSearchResults: (phrase: string) => void;
+  reset: () => void;
 }
 
 export const useBlogs = create<IBlogsStore>()(
@@ -27,15 +28,18 @@ export const useBlogs = create<IBlogsStore>()(
       blogsFetchInProgress: false,
       result: null,
       blogs: [],
-      search: null,
       current: null,
       page: 0,
       incrementPage: () => {
+        const { fetchAllBlogs } = get();
         set({
           page: get().page + 1,
         });
+        fetchAllBlogs();
       },
-      fetchAllBlogs: async (page?: number) => {
+      fetchAllBlogs: async () => {
+        const { page, reset } = get();
+        reset();
         set({
           blogsFetchInProgress: true,
         });
@@ -72,10 +76,38 @@ export const useBlogs = create<IBlogsStore>()(
         }
       },
       getBlogDetails: async (id) => {
+        set({ current: null });
         const blog = await (await fetch(urls.blogDetails(id))).json();
         console.log("COMMENTS => ", blog);
         set({ current: blog });
         return blog;
+      },
+      fetchSearchResults: async (phrase) => {
+        const { reset } = get();
+        reset();
+        set({
+          blogsFetchInProgress: true,
+        });
+        const response = await (
+          await fetch(urls.searchWithQuery(phrase))
+        ).json();
+        set({
+          blogsFetchInProgress: false,
+          result: response,
+          blogs: response.hits,
+          totalHits: response.nbHits,
+          totalPages: response.nbPages,
+          hitsPerPage: response.hitsPerPage,
+        });
+      },
+      reset: () => {
+        set({
+          blogsFetchInProgress: false,
+          result: null,
+          blogs: [],
+          current: null,
+          page: 0,
+        });
       },
     }),
     {

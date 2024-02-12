@@ -3,57 +3,70 @@ import { useBlogs } from "@/hooks/use-blogs";
 import { Hit } from "@/types/blog";
 import React, { useEffect } from "react";
 import BlogCard from "../ui/blog-card";
-import { cn } from "@/lib/utils";
+import { cn, lg } from "@/lib/utils";
 import SearchBar from "../search-bar";
 import TypewriterLoader from "../ui/typewriter-loader";
+import { motion } from "framer-motion";
+import { useSearchParams } from "next/navigation";
 
 type Props = {};
 
-const HomeContent = (props: Props) => {
+const HomeContent = ({}: Props) => {
+  const searchParams = useSearchParams();
   const {
     blogsFetchInProgress,
     page,
     incrementPage,
     blogs,
     fetchAllBlogs,
-    fetchFrontPageBlogs,
+    fetchSearchResults,
   } = useBlogs();
+
   useEffect(() => {
-    if (blogs.length === 0) {
-      fetchAllBlogs(page);
+    const query = searchParams.get("query");
+    if (query) {
+      fetchSearchResults(query);
+    } else if (!blogs.length) {
+      fetchAllBlogs();
     }
-    console.log("BLOGS =>", blogs, page);
-  }, [blogs]);
-  useEffect(() => {
-    fetchAllBlogs(page);
-  }, [page]);
-  const handleScroll = (e: any) => {
-    if (e.target.scrollHeight - e.target.offsetHeight === e.target.scrollTop) {
-      incrementPage();
-    }
+  }, [blogs.length, searchParams.get("query")]);
+
+  const handleLoadMore = (e: any) => {
+    incrementPage();
   };
 
   return (
     <div className=" pb-20 relative left-1/2 -translate-x-1/2 h-[calc(100vh-120px)]">
-      <div className="w-full py-20 p-8 flex flex-col items-center overflow-scroll">
+      <div
+        className={cn(
+          "w-full py-20 p-8 flex flex-col items-center overflow-scroll"
+        )}
+      >
         <div
           className={cn(
             "w-full md:max-w-screen-xl",
             "masonry",
             blogs.length > 0 ? " h-full" : "h-0"
           )}
-          // onScroll={handleScroll}
         >
           {blogs?.map((blog: Hit, idx: number) => (
             <BlogCard key={blog.objectID} data={blog} index={idx} />
           ))}
         </div>
-        <button
-          className="mt-10 px-10 py-3 rounded-lg border border-gunmetal text-2xl"
-          onClick={handleScroll}
+        <motion.button
+          whileHover={{
+            borderWidth: "10px",
+            borderColor:
+              "linear-gradient(90deg, cyan, white 51%, cyan) 100%/ 200%",
+          }}
+          className={cn(
+            "mt-10 px-10 py-3 rounded-lg border border-gunmetal text-2xl dark:text-cyan dark:border-cyan",
+            !blogs.length && "hidden"
+          )}
+          onClick={handleLoadMore}
         >
           Load More
-        </button>
+        </motion.button>
       </div>
       <TypewriterLoader
         className={cn(
