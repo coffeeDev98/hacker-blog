@@ -42,7 +42,7 @@ const HomeContent = ({}: Props) => {
           "w-full py-20 p-8 flex flex-col items-center overflow-scroll"
         )}
       >
-        <Carousel data={blogs.slice(10)} />
+        <Carousel data={blogs.slice(5)} />
         <div
           className={cn(
             "w-full md:max-w-screen-xl",
@@ -50,7 +50,7 @@ const HomeContent = ({}: Props) => {
             blogs.length > 0 ? " h-full" : "h-0"
           )}
         >
-          {blogs.slice(10, blogs.length)?.map((blog: Hit, idx: number) => (
+          {blogs.slice(6, blogs.length)?.map((blog: Hit, idx: number) => (
             <BlogCard key={blog.objectID} data={blog} index={idx} />
           ))}
         </div>
@@ -73,7 +73,7 @@ const HomeContent = ({}: Props) => {
           "left-1/2 -translate-x-1/2 my-5",
           `1`,
           blogs.length === 0 && "top-1/2 -translate-y-1/2",
-          blogsFetchInProgress ? "block" : "hidden"
+          blogsFetchInProgress && blogs.length === 0 ? "block" : "hidden"
         )}
       />
     </div>

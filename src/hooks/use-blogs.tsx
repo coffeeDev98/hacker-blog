@@ -39,7 +39,7 @@ export const useBlogs = create<IBlogsStore>()(
       },
       fetchAllBlogs: async () => {
         const { page, reset } = get();
-        reset();
+        page === 0 && reset();
         set({
           blogsFetchInProgress: true,
         });
