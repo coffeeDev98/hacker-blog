@@ -25,7 +25,7 @@ const BlogCard = ({ data, className, index }: Props) => {
         }}
         whileTap={{ scale: 0.9 }}
         className={cn(
-          "rounded-xl w-full h-full text-left p-5 pb-3 bg-vista-white border-comet text-gunmetal border-[0.5px] border-opacity-25 flex flex-col justify-between font-inter text-xl hover:text-2xl",
+          "rounded-xl w-full h-full text-left p-5 pb-3 bg-vista-white border-comet text-gunmetal border-[0.5px] border-opacity-25 flex flex-col justify-between font-inter text-base md:text-xl hover:text-lg  md:hover:text-2xl",
           "dark:border-lily dark:bg-gunmetal",
           // "hover:scale-105 lg:hover:scale-110",
           className

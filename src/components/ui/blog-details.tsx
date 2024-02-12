@@ -61,7 +61,7 @@ const BlogDetails = ({ id }: Props) => {
           </div>
         </div>
         <h1
-          className="text-5xl leading-relaxed bg-gradient-to-r from-gunmetal via-blue-800 to-gunmetal dark:from-[#84fab0] dark:via-[#8fd3f4] dark:to-[#84fab0] transition-all duration-200"
+          className="text-4xl md:text-5xl leading-relaxed bg-gradient-to-r from-gunmetal via-blue-800 to-gunmetal dark:from-[#84fab0] dark:via-[#8fd3f4] dark:to-[#84fab0] transition-all duration-200"
           style={{
             // background: lg(cSet.c1, cSet.c2, "100%"),
             WebkitBackgroundClip: "text",

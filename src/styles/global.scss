@@ -30,12 +30,6 @@ body {
     rgb(var(--background-start-rgb));
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
-}
-
 h1 {
   display: block;
   font-size: 2em;
@@ -135,6 +129,12 @@ h6 {
     @media (max-width: 1440px) {
       width: 90%;
     }
+  }
+}
+
+.comment {
+  a {
+    @apply text-lily visited:text-comet dark:text-aqua dark:visited:text-cyan;
   }
 }
 

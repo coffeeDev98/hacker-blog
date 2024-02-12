@@ -68,7 +68,7 @@ const BlogComment = ({ data, nested }: Props) => {
           </button>
         )}
         <div
-          className="pl-10 text-xl text-gunmetal dark:text-vista-white"
+          className="comment pl-10 text-base md:text-xl text-gunmetal dark:text-vista-white w-full overflow-hidden break-words"
           dangerouslySetInnerHTML={{ __html: data.text || "" }}
         ></div>
         {!nested && data.children.length >= 2 && (
