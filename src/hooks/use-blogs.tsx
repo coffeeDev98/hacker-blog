@@ -1,4 +1,4 @@
-import { envVariables, urls } from "@/constants/config";
+import { urls } from "@/constants/config";
 import { Blog, Blogs, Hit } from "@/types/blog";
 import { Nullable } from "@/types/helpers";
 import { create } from "zustand";
@@ -66,8 +66,6 @@ export const useBlogs = create<IBlogsStore>()(
       fetchFrontPageBlogs: async () => {
         const response: Blogs = await (await fetch(urls.frontPage)).json();
 
-        console.log("front-page =>", response);
-
         if (response.hits.length > 0) {
           set({
             frontPageBlogs: response.hits,
@@ -76,7 +74,6 @@ export const useBlogs = create<IBlogsStore>()(
       },
       getBlogDetails: async (id) => {
         const { current } = get();
-        console.log("COMPARE => ", id, `${current?.story_id}`);
         if (id !== `${current?.story_id}`) {
           set({ current: null });
           const blog = await (await fetch(urls.blogDetails(id))).json();

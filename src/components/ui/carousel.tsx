@@ -7,18 +7,9 @@ import { cn } from "@/lib/utils";
 
 type Props = { data: Hit[] };
 
-// const MotionBox = styled(motion.div)`
-//   background-color: rgb(172, 236, 161);
-//   border-radius: 15px;
-//   height: 100%;
-//   width: 100%;
-//   position: absolute;
-// `;
-
 const variants = {
-  enter: (direction: number) => {
+  enter: () => {
     return {
-      // x: direction > 0 ? 50 : -50,
       opacity: 0,
     };
   },
@@ -27,10 +18,9 @@ const variants = {
     x: 0,
     opacity: 1,
   },
-  exit: (direction: number) => {
+  exit: () => {
     return {
       zIndex: 0,
-      // x: direction < 0 ? 50 : -50,
       opacity: 0,
     };
   },
@@ -53,10 +43,6 @@ const Carousel = ({ data }: Props) => {
       };
     }
   }, [data.length]);
-
-  useEffect(() => {
-    console.log("P => ", page);
-  }, [page]);
 
   return (
     <div

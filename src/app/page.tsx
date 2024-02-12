@@ -1,11 +1,7 @@
-import Bar from "@/components/bar";
 import HomeContent from "@/components/pages/home";
-import SearchBar from "@/components/search-bar";
 import React from "react";
 
-type Props = {};
-
-const page = (props: Props) => {
+const page = () => {
   return (
     <div className="">
       <HomeContent />

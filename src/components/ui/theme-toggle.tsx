@@ -1,6 +1,5 @@
 "use client";
 import { cn } from "@/lib/utils";
-import { Theme } from "@/types";
 import { Moon, Sun } from "lucide-react";
 import React, { useEffect, useState } from "react";
 

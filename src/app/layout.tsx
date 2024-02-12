@@ -17,6 +17,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="preconnect" href="https://hn.algolia.com" />
+      </head>
       <body
         className={cn(
           inter.variable,

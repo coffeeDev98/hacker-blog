@@ -1,17 +1,10 @@
 "use client";
 import { useBlogs } from "@/hooks/use-blogs";
-import { Blog, Hit } from "@/types/blog";
-import { Maybe } from "@/types/helpers";
-import { useSearchParams } from "next/navigation";
-import React, { useEffect, useMemo, useState } from "react";
+import { Hit } from "@/types/blog";
+import React, { useEffect, useState } from "react";
 import BlogComment from "./blog-comment";
-import { cn, getColorSet, getReplyCount, lg, twlg } from "@/lib/utils";
-import {
-  ArrowBigUp,
-  CircleUserRound,
-  HandMetal,
-  MessageSquareText,
-} from "lucide-react";
+import { cn, getReplyCount } from "@/lib/utils";
+import { ArrowBigUp, CircleUserRound, MessageSquareText } from "lucide-react";
 import TypewriterLoader from "./typewriter-loader";
 
 type Props = { id: Hit["objectID"]; title: Hit["title"] };

@@ -1,11 +1,7 @@
 import HomeContent from "@/components/pages/home";
 import React from "react";
 
-type Props = {
-  searchParams: { query: string };
-};
-
-const SearchPage = ({ searchParams }: Props) => {
+const SearchPage = () => {
   return (
     <div>
       <HomeContent />

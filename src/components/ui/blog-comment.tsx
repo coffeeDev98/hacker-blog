@@ -1,15 +1,8 @@
 "use client";
 import { cn, getReplyCount } from "@/lib/utils";
 import { Blog } from "@/types/blog";
-import { AnimatePresence, motion } from "framer-motion";
-import {
-  CircleUserRound,
-  MinusCircle,
-  PlusCircle,
-  Tally1,
-  UserCircle,
-} from "lucide-react";
-import React, { useEffect, useMemo, useState } from "react";
+import { CircleUserRound, MinusCircle, PlusCircle } from "lucide-react";
+import React, { useMemo, useState } from "react";
 
 type Props = {
   data: Blog;

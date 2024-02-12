@@ -1,7 +1,5 @@
 "use client";
-import { useBlogs } from "@/hooks/use-blogs";
 import { cn } from "@/lib/utils";
-import { Nullable } from "@/types/helpers";
 import { Search } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import React, { useEffect, useState } from "react";
@@ -14,29 +12,14 @@ const SearchBar = ({ className }: Props) => {
   const query = useSearchParams().get("query");
   const [searchText, setSearchText] = useState<string>(query || "");
   const router = useRouter();
-  const { fetchSearchResults } = useBlogs();
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchText(e.target.value);
-  };
-
-  const reset = () => {
-    setSearchText("");
-  };
 
   useEffect(() => {
     setSearchText(query || "");
   }, [query]);
-  // useEffect(() => {
-  //   const fnCall = setTimeout(() => {
-  //     fetchSearchResults(searchText);
-  //   }, 300);
 
-  //   return () => {
-  //     clearTimeout(fnCall);
-  //   };
-  // }, [searchText]);
-
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(e.target.value);
+  };
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       e.preventDefault();
