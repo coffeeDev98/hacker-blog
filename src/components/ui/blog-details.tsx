@@ -34,7 +34,7 @@ const BlogDetails = ({ id }: Props) => {
     <div className="max-w-screen-md relative w-full flex flex-col items-center pb-20">
       <div
         className={cn(
-          "w-full flex flex-col justify-center leading-relaxed h-80 border-b-[0.5px] border-b-gunmetal border-opacity-25",
+          "w-full flex flex-col justify-center pb-5 leading-relaxed max-h-96 border-b-[0.5px] border-b-gunmetal border-opacity-25",
           " dark:border-b-lily text-gunmetal dark:text-vista-white"
         )}
         style={{}}
