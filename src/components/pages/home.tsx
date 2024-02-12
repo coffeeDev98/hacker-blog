@@ -8,6 +8,7 @@ import SearchBar from "../search-bar";
 import TypewriterLoader from "../ui/typewriter-loader";
 import { motion } from "framer-motion";
 import { useSearchParams } from "next/navigation";
+import Carousel from "../ui/carousel";
 
 type Props = {};
 
@@ -42,6 +43,7 @@ const HomeContent = ({}: Props) => {
           "w-full py-20 p-8 flex flex-col items-center overflow-scroll"
         )}
       >
+        <Carousel data={blogs.slice(10)} />
         <div
           className={cn(
             "w-full md:max-w-screen-xl",
@@ -49,15 +51,14 @@ const HomeContent = ({}: Props) => {
             blogs.length > 0 ? " h-full" : "h-0"
           )}
         >
-          {blogs?.map((blog: Hit, idx: number) => (
+          {blogs.slice(10, blogs.length)?.map((blog: Hit, idx: number) => (
             <BlogCard key={blog.objectID} data={blog} index={idx} />
           ))}
         </div>
         <motion.button
           whileHover={{
-            borderWidth: "10px",
-            borderColor:
-              "linear-gradient(90deg, cyan, white 51%, cyan) 100%/ 200%",
+            fontWeight: 600,
+            scale: 1.05,
           }}
           className={cn(
             "mt-10 px-10 py-3 rounded-lg border border-gunmetal text-2xl dark:text-cyan dark:border-cyan",

@@ -49,7 +49,7 @@ const BlogComment = ({ data, nested }: Props) => {
         </div>
         {data.children.length >= 2 && (
           <button
-            className="absolute left-[3.5px] h-[calc(100%-0.25rem)] flex flex-col items-center gap-3 opacity-60 hover:opacity-100"
+            className="absolute left-[3.5px] top-9 h-[calc(100%-2.5rem)] flex flex-col items-center gap-3 opacity-60 hover:opacity-100"
             onClick={toggleAccordian}
           >
             <div className="h-full w-[1px] bg-gunmetal dark:bg-vista-white" />
@@ -71,7 +71,7 @@ const BlogComment = ({ data, nested }: Props) => {
           className="comment pl-10 text-base md:text-xl text-gunmetal dark:text-vista-white w-full overflow-hidden break-words"
           dangerouslySetInnerHTML={{ __html: data.text || "" }}
         ></div>
-        {!nested && data.children.length >= 2 && (
+        {data.children.length >= 2 && (
           <button
             className="ml-10  rounded-3xl absolute left-0 bottom-0 text-xl text-left w-max text-gunmetal hover:font-semibold hover:scale-105 hover:translate-x-1 hover:underline hover:underline-offset-2 dark:text-cyan"
             onClick={toggleAccordian}
