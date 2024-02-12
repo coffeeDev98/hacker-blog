@@ -26,10 +26,10 @@ const HomeContent = ({}: Props) => {
     const query = searchParams.get("query");
     if (query) {
       fetchSearchResults(query);
-    } else if (!blogs.length) {
+    } else {
       fetchAllBlogs();
     }
-  }, [blogs.length, searchParams.get("query")]);
+  }, [searchParams.get("query")]);
 
   const handleLoadMore = (e: any) => {
     incrementPage();

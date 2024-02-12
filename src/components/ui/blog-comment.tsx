@@ -2,7 +2,13 @@
 import { cn, getReplyCount } from "@/lib/utils";
 import { Blog } from "@/types/blog";
 import { AnimatePresence, motion } from "framer-motion";
-import { CircleUserRound, PlusCircle, Tally1, UserCircle } from "lucide-react";
+import {
+  CircleUserRound,
+  MinusCircle,
+  PlusCircle,
+  Tally1,
+  UserCircle,
+} from "lucide-react";
 import React, { useEffect, useMemo, useState } from "react";
 
 type Props = {
@@ -47,7 +53,18 @@ const BlogComment = ({ data, nested }: Props) => {
             onClick={toggleAccordian}
           >
             <div className="h-full w-[1px] bg-gunmetal dark:bg-vista-white" />
-            <PlusCircle className="w-6 h-6 stroke-gunmetal dark:stroke-vista-white hover:scale-125" />
+            <PlusCircle
+              className={cn(
+                "w-6 h-6 stroke-gunmetal dark:stroke-vista-white hover:scale-125",
+                isOpen && "hidden"
+              )}
+            />
+            <MinusCircle
+              className={cn(
+                "w-6 h-6 stroke-gunmetal dark:stroke-vista-white hover:scale-125",
+                !isOpen && "hidden"
+              )}
+            />
           </button>
         )}
         <div
