@@ -3,6 +3,7 @@ import "../styles/global.scss";
 import { firacode, inter } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
 import Bar from "@/components/bar";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -24,8 +25,10 @@ export default function RootLayout({
           "bg-vista-white dark:bg-gunmetal"
         )}
       >
-        <Bar />
-        {children}
+        <Suspense>
+          <Bar />
+          {children}
+        </Suspense>
       </body>
     </html>
   );

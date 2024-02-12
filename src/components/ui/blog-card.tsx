@@ -41,7 +41,7 @@ const BlogCard = ({ data, className, index }: Props) => {
             occaecat officia ea.
           </div>
         </div>
-        <div className="w-full border-t-[0.5px] border-t-comet border-opacity-30 py-2 dark:border-t-lily">
+        <div className="w-full border-t-[0.5px] border-t-comet border-opacity-60 py-2">
           <span className="mr-1">By</span>
           <span className="text-comet">
             <strong>{data.author}</strong>
